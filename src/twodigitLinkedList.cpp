@@ -14,13 +14,45 @@ NOTES: Only Postive Numbers
 
 #include <stdio.h>
 #include <malloc.h>
-
-struct node {
+int exponential(int);
+typedef struct node {
 	int digit1;
 	int digit2;
-	struct node *next;
+	node *next;
 };
 
-int convert_sll_2digit_to_int(struct node *head){
-	return 0;
+
+int convert_sll_2digit_to_int(node *head){
+	
+	node *p;
+	int n = 0, i, s = 0;
+	p = head;
+	while (p != '\0')
+	{
+		p = p->next;
+		n++;
+	}
+	p = head;
+	n *= 2;
+	while (p != '\0')
+	{
+		i = p->digit1;
+		s += i*exponential(n - 1);
+		n--;
+		i = p->digit2;
+		s += i*exponential(n - 1);
+		n--;
+		p = p->next;
+	}
+	return s;
+}
+int exponential(int j)
+{
+	int s = 1;
+	while (j>0)
+	{
+		s = s * 10;
+		j--;
+	}
+	return s;
 }
